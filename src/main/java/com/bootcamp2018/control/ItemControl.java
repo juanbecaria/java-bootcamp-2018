@@ -9,11 +9,12 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-@Controller
-@RequestMapping("/item")
+@RestController
 public class ItemControl {
 
 
@@ -23,7 +24,7 @@ public class ItemControl {
         return itemDAO.createItem(object);
     }
 
-    @RequestMapping(value="/")
+    @RequestMapping(value="/list",method = RequestMethod.POST)
     public ResponseEntity<Item> get(@RequestBody Item item) {
         ItemDAO itemDAO = new ItemDAO();
         item = itemDAO.retriveItem(item.getId());

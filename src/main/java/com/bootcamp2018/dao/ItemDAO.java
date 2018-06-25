@@ -2,11 +2,12 @@ package com.bootcamp2018.dao;
 
 import com.bootcamp2018.db.DBConnection;
 import com.bootcamp2018.model.Item;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-
+@Service
 public class ItemDAO {
 
 

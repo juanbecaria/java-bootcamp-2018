@@ -2,10 +2,11 @@ package com.bootcamp2018.dao;
 
 import com.bootcamp2018.db.DBConnection;
 import com.bootcamp2018.model.*;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+@Service
 public class ClientDAO {
 
     public Client createClient(Client client) {
