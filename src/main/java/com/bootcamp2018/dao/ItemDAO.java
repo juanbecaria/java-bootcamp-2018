@@ -49,12 +49,12 @@ public class ItemDAO {
 
     }
 
-    public Item retriveItem(int id)  {
+    public Item retriveItem(int id) {
         Item list = new Item();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
-            pstmt = con.prepareStatement("SELECT idItem, name, price FROM item");
-
+            pstmt = con.prepareStatement("SELECT idItem, name, price FROM item WHERE idItem = ?");
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list = new Item(rs.getInt(1), rs.getString(2), rs.getDouble(3));

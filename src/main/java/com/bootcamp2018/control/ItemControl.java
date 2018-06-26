@@ -14,44 +14,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 
 @Controller
+
 public class ItemControl {
 
 
-
-    public Item create(Item object) {
+    @RequestMapping(value="/Item/set",method = RequestMethod.PUT)
+    public ResponseEntity<Item> create(@RequestBody Item object) {
         ItemDAO itemDAO = new ItemDAO();
-        return itemDAO.createItem(object);
+        return new ResponseEntity<>(itemDAO.createItem(object),HttpStatus.OK);
     }
 
 
-    @RequestMapping(value="/list/get",method = RequestMethod.POST)
+    @RequestMapping(value="/Item/get",method = RequestMethod.POST)
     public ResponseEntity<Item> get(@RequestBody Item item) {
         ItemDAO itemDAO = new ItemDAO();
         item = itemDAO.retriveItem(item.getId());
         return new ResponseEntity<>(item,HttpStatus.OK);
     }
-    @RequestMapping(value="/list",method = RequestMethod.GET)
-    public String getList(Item object) {
+    @RequestMapping(value="/Item/list",method = RequestMethod.POST)
+    public ResponseEntity<ArrayList<Item>> getList(@RequestBody Item object) {
         ItemDAO itemDAO = new ItemDAO();
-        String str= "";
-        for (Item it: itemDAO.retriveItems(object)
-             ) {
-            str += it.toString();
-        }
-
-        return  str;
+        return  new ResponseEntity(itemDAO.retriveItems(object),HttpStatus.OK);
     }
 
-
-    public Item update(Item object) {
+    @RequestMapping(value="/Item/update",method = RequestMethod.PUT)
+    public ResponseEntity<Item> update(@RequestBody Item object) {
         ItemDAO itemDAO = new ItemDAO();
-        return itemDAO.updateItem(object);
+        return new ResponseEntity(itemDAO.updateItem(object),HttpStatus.OK);
     }
 
-
-    public void delete(Item object) {
+    @RequestMapping(value="/Item/delete",method = RequestMethod.POST)
+    public void delete(@RequestBody Item object) {
         ItemDAO itemDAO = new ItemDAO();
         itemDAO.deleteItem(object);
-
     }
 }
