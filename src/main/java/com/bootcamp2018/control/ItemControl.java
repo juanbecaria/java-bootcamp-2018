@@ -23,6 +23,7 @@ public class ItemControl {
         return itemDAO.createItem(object);
     }
 
+
     @RequestMapping(value="/list/get",method = RequestMethod.POST)
     public ResponseEntity<Item> get(@RequestBody Item item) {
         ItemDAO itemDAO = new ItemDAO();
