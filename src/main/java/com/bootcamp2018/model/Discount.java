@@ -32,6 +32,13 @@ public class Discount {
         this.price = price;
     }
 
+    public Discount(int id,Item item, int quantity, double price) {
+        this.item = item;
+        this.quantity = quantity;
+        this.price = price;
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

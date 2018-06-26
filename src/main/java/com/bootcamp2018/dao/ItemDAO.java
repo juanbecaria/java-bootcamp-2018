@@ -26,10 +26,7 @@ public class ItemDAO {
                 item = new Item();
             }
             pstmt.close();
-        } catch (Exception e) {
-
-        }
-
+        } catch (Exception e) {}
         return item;
     }
 
@@ -42,9 +39,8 @@ public class ItemDAO {
             while (rs.next()) {
                 list.add(new Item(rs.getInt(1), rs.getString(2), rs.getDouble(3)));
             }
-        } catch (Exception e) {
-        }
-
+            pstmt.close();
+        } catch (Exception e) {}
         return list;
 
     }
@@ -59,8 +55,8 @@ public class ItemDAO {
             while (rs.next()) {
                 list = new Item(rs.getInt(1), rs.getString(2), rs.getDouble(3));
             }
-        } catch (Exception e) {
-        }
+            pstmt.close();
+        } catch (Exception e) {}
         return list;
     }
 
@@ -72,9 +68,8 @@ public class ItemDAO {
             pstmt = con.prepareStatement("DELETE FROM item WHERE idItem = ?");
             pstmt.setInt(1, item.getId());
             pstmt.executeUpdate();
-        } catch (Exception e) {
-
-        }
+            pstmt.close();
+        } catch (Exception e) {}
     }
 
     public Item updateItem(Item item) {
@@ -85,10 +80,9 @@ public class ItemDAO {
             pstmt.setString(1, item.getName());
             pstmt.setDouble(2, item.getPrice());
             pstmt.setInt(3, item.getId());
-
             int resp = pstmt.executeUpdate();
             if (resp == 0) item = new Item();
-
+            pstmt.close();
         } catch (Exception e) {
             item = new Item();
         }

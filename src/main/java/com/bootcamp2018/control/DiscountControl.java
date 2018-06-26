@@ -1,6 +1,6 @@
 package com.bootcamp2018.control;
 
-import com.bootcamp2018.dao.DiscountDAO;
+
 import com.bootcamp2018.model.Discount;
 import com.bootcamp2018.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.ArrayList;
 
@@ -30,18 +30,18 @@ public class DiscountControl {
         return  new ResponseEntity<>(ds.get(object),HttpStatus.OK);
     }
 
-
-    public ResponseEntity<ArrayList<Discount>> getList(Discount object) {
-        return null;
+    @RequestMapping(value="/list",method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Discount>> getList() {
+        return new ResponseEntity<>(ds.getList(new Discount()),HttpStatus.OK);
     }
 
-
-    public Discount update(Discount object) {
-        return null;
+    @RequestMapping(value="/update",method = RequestMethod.POST)
+    public ResponseEntity<Discount> update(@RequestBody Discount object) {
+        return new ResponseEntity<>(ds.update(object), HttpStatus.OK);
     }
 
-
-    public void delete(Discount object) {
-
+    @RequestMapping(value="/delete",method = RequestMethod.POST)
+    public void delete(@RequestBody Discount object) {
+        ds.delete(object);
     }
 }
