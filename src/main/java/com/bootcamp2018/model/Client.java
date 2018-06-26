@@ -1,16 +1,15 @@
 package com.bootcamp2018.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 import java.util.ArrayList;
-@Component
+
 public class Client {
     private int id;
     private String name;
     private String lastName;
     private String description;
-    @Autowired
+
     private ArrayList<Payment> Payments;
 
     public Client(int id) {

@@ -1,13 +1,8 @@
 package com.bootcamp2018.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-
-@Component
 public class Payment {
     private int Id;
-    @Autowired
     private Order order;
     private double amount;
 

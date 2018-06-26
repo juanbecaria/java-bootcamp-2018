@@ -10,30 +10,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-@RestController
+@Controller
 public class ItemControl {
 
 
-    @RequestMapping
+
     public Item create(Item object) {
         ItemDAO itemDAO = new ItemDAO();
         return itemDAO.createItem(object);
     }
 
-    @RequestMapping(value="/list",method = RequestMethod.POST)
+    @RequestMapping(value="/list/get",method = RequestMethod.POST)
     public ResponseEntity<Item> get(@RequestBody Item item) {
         ItemDAO itemDAO = new ItemDAO();
         item = itemDAO.retriveItem(item.getId());
-        return new ResponseEntity<Item>(item,HttpStatus.OK);
+        return new ResponseEntity<>(item,HttpStatus.OK);
     }
-
-    public ArrayList<Item> getList(Item object) {
+    @RequestMapping(value="/list",method = RequestMethod.GET)
+    public String getList(Item object) {
         ItemDAO itemDAO = new ItemDAO();
-        return itemDAO.retriveItems(object);
+        String str= "";
+        for (Item it: itemDAO.retriveItems(object)
+             ) {
+            str += it.toString();
+        }
+
+        return  str;
     }
 
 

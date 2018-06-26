@@ -2,18 +2,14 @@ package com.bootcamp2018.control;
 
 import com.bootcamp2018.dto.PaymentDTO;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 import java.util.ArrayList;
-@Controller
-@RequestMapping("/")
+
 public class PaymentControl  {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+
     public PaymentDTO create(PaymentDTO Object) {
         return Object;
     }
