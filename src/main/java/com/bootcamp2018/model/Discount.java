@@ -1,9 +1,11 @@
 package com.bootcamp2018.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class Discount {
+    @Autowired
     private Item item;
     private int quantity;
     private double price;
@@ -15,6 +17,13 @@ public class Discount {
         this.quantity = 0;
         this.price = 0;
         this.id = 0;
+    }
+    public Discount(int id) {
+
+        this.item = new Item();
+        this.quantity = 0;
+        this.price = 0;
+        this.id = id;
     }
 
     public Discount(Item item, int quantity, double price) {
@@ -65,5 +74,10 @@ public class Discount {
             }
         }
         return ban;
+    }
+
+    @Override
+    public String toString() {
+        return "ID:"+id+", Quantity:"+quantity+", Price:"+price+", Item= "+item.toString();
     }
 }

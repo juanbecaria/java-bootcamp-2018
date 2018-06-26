@@ -3,12 +3,14 @@ package com.bootcamp2018.dao;
 import com.bootcamp2018.db.DBConnection;
 import com.bootcamp2018.model.Discount;
 import com.bootcamp2018.model.Item;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+@Repository
 public class DiscountDAO {
 
 
@@ -24,6 +26,28 @@ public class DiscountDAO {
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 discount.setId(rs.getInt(1));
+            } else {
+                discount = new Discount();
+            }
+            pstmt.close();
+        } catch (Exception e) {
+
+        }
+
+        return discount;
+    }
+
+    public Discount get(Discount discount){
+        try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
+            PreparedStatement pstmt;
+            pstmt = con.prepareStatement("SELECT idDiscount,idItem, quantity, price FROM discount WHERE idDiscount = ?", Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, discount.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                discount.setPrice(rs.getInt(4));
+                discount.setQuantity(rs.getInt(3));
+                ItemDAO itemDAO = new ItemDAO();
+                discount.setItem(itemDAO.retriveItem(rs.getInt(2)));
             } else {
                 discount = new Discount();
             }

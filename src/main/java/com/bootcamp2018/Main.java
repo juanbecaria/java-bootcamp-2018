@@ -1,6 +1,9 @@
 package com.bootcamp2018;
 
 
+import com.bootcamp2018.control.DiscountControl;
+import com.bootcamp2018.model.Discount;
+import com.bootcamp2018.service.DiscountService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,7 +13,8 @@ public class Main {
 
     public static void main(String[] Arg) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
+       // DiscountService ds = new DiscountService();
+        //System.out.println(ds.get(new Discount(1)).toString());
 //        int op = 0;
 //        boolean ban = false;
 //        String menu;

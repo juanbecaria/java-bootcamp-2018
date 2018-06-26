@@ -2,10 +2,9 @@ package com.bootcamp2018.service;
 
 import com.bootcamp2018.dao.ItemDAO;
 import com.bootcamp2018.model.Item;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+@org.springframework.stereotype.Service
 public class ItemService implements Service<Item> {
 
     @Override
@@ -16,7 +15,9 @@ public class ItemService implements Service<Item> {
 
     @Override
     public Item get(Item Object) {
-        return null;
+        ItemDAO itemDAO = new ItemDAO();
+        Object = itemDAO.retriveItem(Object.getId());
+        return Object;
     }
 
     @Override

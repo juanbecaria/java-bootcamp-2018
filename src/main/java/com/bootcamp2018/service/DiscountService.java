@@ -2,10 +2,12 @@ package com.bootcamp2018.service;
 
 import com.bootcamp2018.dao.DiscountDAO;
 import com.bootcamp2018.model.Discount;
-
 import java.util.ArrayList;
 
+@org.springframework.stereotype.Service
 public class DiscountService implements Service<Discount> {
+
+
     @Override
     public Discount create(Discount object) {
         DiscountDAO dDAO = new DiscountDAO();
@@ -14,7 +16,9 @@ public class DiscountService implements Service<Discount> {
 
     @Override
     public Discount get(Discount object) {
-        return null;
+        DiscountDAO dDAO = new DiscountDAO();
+        return dDAO.get(object);
+
     }
 
     @Override

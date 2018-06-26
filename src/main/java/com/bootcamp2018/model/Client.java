@@ -1,7 +1,5 @@
 package com.bootcamp2018.model;
 
-
-
 import java.util.ArrayList;
 
 public class Client {
@@ -9,7 +7,6 @@ public class Client {
     private String name;
     private String lastName;
     private String description;
-
     private ArrayList<Payment> Payments;
 
     public Client(int id) {
