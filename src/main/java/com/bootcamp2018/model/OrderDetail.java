@@ -1,11 +1,11 @@
 package com.bootcamp2018.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 public class OrderDetail {
 
+
     private Item item;
+
     private int quantity;
     private double price;
 
@@ -19,6 +19,11 @@ public class OrderDetail {
         this.item = item;
         this.quantity = quantity;
         this.price = item.getPrice();
+    }
+    public OrderDetail(Item item, int quantity, double price) {
+        this.item = item;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public Item getItem() {

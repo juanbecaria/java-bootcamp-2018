@@ -2,7 +2,9 @@ package com.bootcamp2018.dto;
 
 import com.bootcamp2018.model.OrderDetail;
 
+
 public class OrderDetailDTO {
+
     private int idOrder;
     private OrderDetail orderDetail;
 

@@ -27,7 +27,7 @@ public class OrderDAO {
                 for (OrderDetail od : order.getOrder().getOrderDetails()
                         ) {
                     OrderDetailDAO odd = new OrderDetailDAO();
-                    od = odd.createOrderDetail(new OrderDetailDTO(order.getOrder().getId(), od));
+                    //od = odd.createOrderDetail(new OrderDetailDTO(order.getOrder().getId(), od));
                 }
             } else {
                 order.setOrder(new Order());
