@@ -74,6 +74,9 @@ public class DiscountDAO {
             pstmt.setDouble(2, discount.getPrice());
             int resp = pstmt.executeUpdate();
             if (resp == 0) discount = new Discount();
+            else{
+                discount = get(discount);
+            }
             pstmt.close();
         } catch (Exception e) {}
         return discount;

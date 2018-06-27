@@ -2,14 +2,14 @@ package com.bootcamp2018.dao;
 
 import com.bootcamp2018.db.DBConnection;
 import com.bootcamp2018.model.*;
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
-@Service
+
+@Repository
 public class ClientDAO {
 
-    public Client createClient(Client client) {
+    public Client create(Client client) {
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("INSERT INTO client (name,lastName, description) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -29,7 +29,7 @@ public class ClientDAO {
         return new Client();
     }
 
-    public ArrayList<Client> getClients() throws SQLException {
+    public ArrayList<Client> list()  {
         ArrayList<Client> list = new ArrayList<>();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
@@ -43,7 +43,7 @@ public class ClientDAO {
         return list;
     }
 
-    public Client getClient(Client cli) throws SQLException {
+    public Client get(Client cli){
         Client client = new Client();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
@@ -59,7 +59,7 @@ public class ClientDAO {
     }
 
 
-    public Client deleteItem(Client client) {
+    public Client delete(Client client) {
 
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
@@ -74,7 +74,7 @@ public class ClientDAO {
         return client;
     }
 
-    public Client updateItem(Client client) throws SQLException {
+    public Client update(Client client)  {
 
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;

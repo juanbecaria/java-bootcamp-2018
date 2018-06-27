@@ -1,36 +1,49 @@
 package com.bootcamp2018.control;
 
 import com.bootcamp2018.model.Client;
+import com.bootcamp2018.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 
 
-
+@Controller
+@RequestMapping("/client")
 public class ClientControl {
 
+    @Autowired
+    ClientService cs;
 
 
-    public Client create(Client Object) {
-        return null;
+    @RequestMapping(value="/create",method = RequestMethod.PUT)
+    public ResponseEntity<Client> create(@RequestBody Client client) {
+        return new ResponseEntity<>(cs.create(client),HttpStatus.OK);
     }
 
-
-    public Client get(Client Object) {
-        return null;
+    @RequestMapping(value="/get",method = RequestMethod.POST)
+    public ResponseEntity<Client> get(Client client) {
+        return new ResponseEntity<>(cs.get(client),HttpStatus.OK);
     }
 
-
-    public ArrayList<Client> getList(Client Objact) {
-        return null;
+    @RequestMapping(value="/get",method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Client>> getList(@RequestBody Client client) {
+        return new ResponseEntity<>(cs.getList(client),HttpStatus.OK);
     }
 
-    public Client update(Client Object) {
-        return null;
+    @RequestMapping(value="/update",method = RequestMethod.POST)
+    public ResponseEntity<Client> update(@RequestBody Client client) {
+        return  new ResponseEntity<>(cs.update(client),HttpStatus.OK);
     }
 
-
-    public void delete(Client Object) {
-
+    @RequestMapping(value="/delete",method = RequestMethod.DELETE)
+    public void delete(@RequestBody Client client) {
+        cs.delete(client);
     }
     //DTO class  ver patron
 }
