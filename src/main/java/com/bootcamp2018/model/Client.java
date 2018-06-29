@@ -17,6 +17,14 @@ public class Client {
         this.Payments = new ArrayList<>();
     }
 
+    public Client(int id, String name, String lastName, String description, ArrayList<Payment> payments) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.description = description;
+        Payments = payments;
+    }
+
     public Client() {
         this.id = 0;
         this.name = "";

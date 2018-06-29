@@ -1,34 +1,40 @@
 package com.bootcamp2018.dto;
 
+import com.bootcamp2018.model.Order;
 import com.bootcamp2018.model.Payment;
 
 public class PaymentDTO {
-    private Payment payment;
-    private int idClient;
+    private int Id;
+    private int idOrder;
+    private double amount;
 
-    public PaymentDTO() {
-        payment = new Payment();
-
+    public PaymentDTO(int id, int idOrder, double amount) {
+        Id = id;
+        this.idOrder = idOrder;
+        this.amount = amount;
     }
 
-    public PaymentDTO(Payment payment, int idClient) {
-        this.payment = payment;
-        this.idClient = idClient;
+    public int getId() {
+        return Id;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public int getIdOrder() {
+        return idOrder;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public void setIdOrder(int idOrder) {
+        this.idOrder = idOrder;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

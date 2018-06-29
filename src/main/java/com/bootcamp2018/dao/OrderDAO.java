@@ -13,29 +13,60 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class OrderDAO {
-    public Order createOrder(OrderDTO order) {
+    public Order create(Order order, int idPayment) {
+        Order respOrder = new Order();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
-
             PreparedStatement pstmt;
-
             pstmt = con.prepareStatement("INSERT INTO Order (idPayment) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, order.getIdPayment());
+            pstmt.setInt(1, idPayment);
             pstmt.executeUpdate();
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                order.getOrder().setId(rs.getInt(1));
-                for (OrderDetail od : order.getOrder().getOrderDetails()
+                respOrder.setId(rs.getInt(1));
+                OrderDetail respOrderDetail = new OrderDetail();
+                for (OrderDetail od : order.getOrderDetails()
                         ) {
                     OrderDetailDAO odd = new OrderDetailDAO();
-                    //od = odd.createOrderDetail(new OrderDetailDTO(order.getOrder().getId(), od));
+                    respOrderDetail = odd.create(od,respOrder.getId());
+                    respOrder.getOrderDetails().add(respOrderDetail);
                 }
             } else {
-                order.setOrder(new Order());
+                respOrder = new Order();
             }
             pstmt.close();
         } catch (Exception e) {
-            order.setOrder(new Order());
+            respOrder = new Order();
         }
-        return order.getOrder();
+        return respOrder;
     }
+
+    public Order get(Order order, int idPayment) {
+        Order respOrder = new Order();
+        try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
+            PreparedStatement pstmt;
+            pstmt = con.prepareStatement("SELECT idOrder FROM 'order' WHERE idPayment = ?", Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, idPayment);
+            pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                respOrder.setId(rs.getInt(1));
+                OrderDetail respOrderDetail = new OrderDetail();
+                for (OrderDetail od : order.getOrderDetails()
+                        ) {
+                    OrderDetailDAO odd = new OrderDetailDAO();
+                    respOrderDetail = odd.create(od,respOrder.getId());
+                    respOrder.getOrderDetails().add(respOrderDetail);
+                }
+            } else {
+                respOrder = new Order();
+            }
+            pstmt.close();
+        } catch (Exception e) {
+            respOrder = new Order();
+        }
+        return respOrder;
+    }
+
+
+
 }

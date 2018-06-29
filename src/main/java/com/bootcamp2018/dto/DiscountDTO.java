@@ -1,27 +1,24 @@
 package com.bootcamp2018.dto;
 
-import com.bootcamp2018.model.Item;
-import com.bootcamp2018.model.OrderDetail;
-
-
-public class OrderDetailDTO {
-
-    private int idItem;
+public class DiscountDTO {
+    private int iditem;
     private int quantity;
     private double price;
+    private int id;
 
-    public OrderDetailDTO(int idItem, int quantity, double price) {
-        this.idItem = idItem;
+    public DiscountDTO(int iditem, int quantity, double price, int id) {
+        this.iditem = iditem;
         this.quantity = quantity;
         this.price = price;
+        this.id = id;
     }
 
-    public int getIdItem() {
-        return idItem;
+    public int getIditem() {
+        return iditem;
     }
 
-    public void setIdItem(int idItem) {
-        this.idItem = idItem;
+    public void setIditem(int iditem) {
+        this.iditem = iditem;
     }
 
     public int getQuantity() {
@@ -38,5 +35,13 @@ public class OrderDetailDTO {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

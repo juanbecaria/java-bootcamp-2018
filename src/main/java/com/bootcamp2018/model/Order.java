@@ -4,8 +4,8 @@ package com.bootcamp2018.model;
 import java.util.ArrayList;
 
 public class Order {
-    private int Id;
 
+    private int Id;
     private ArrayList<OrderDetail> orderDetails;
 
     public Order() {

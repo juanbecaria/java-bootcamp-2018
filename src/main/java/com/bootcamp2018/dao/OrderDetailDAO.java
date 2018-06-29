@@ -15,37 +15,35 @@ import java.util.ArrayList;
 @Repository
 public class OrderDetailDAO {
 
-    public OrderDetailDTO create(OrderDetailDTO orderDetail) {
+    public OrderDetail create(OrderDetail orderDetail, int idOrder) {
+        OrderDetail respOrderDetail = new OrderDetail(orderDetail.getItem(),orderDetail.getQuantity(),orderDetail.getPrice());
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
-            pstmt = con.prepareStatement("INSERT INTO OrderDetail (idItem,idOrder,quantity, price) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, orderDetail.getOrderDetail().getItem().getId());
-            pstmt.setInt(2, orderDetail.getIdOrder());
-            pstmt.setInt(2, orderDetail.getOrderDetail().getQuantity());
-            pstmt.setDouble(2, orderDetail.getOrderDetail().getPrice());
-            pstmt.executeUpdate();
-            ResultSet rs = pstmt.getGeneratedKeys();
-            if (!rs.next()) {
-                orderDetail.setOrderDetail(new OrderDetail());
-            }
+            pstmt = con.prepareStatement("INSERT INTO OrderDetail (idItem,idOrder,quantity, price) VALUES (?,?,?,?)");
+            pstmt.setInt(1, orderDetail.getItem().getId());
+            pstmt.setInt(2, idOrder);
+            pstmt.setInt(3, orderDetail.getQuantity());
+            pstmt.setDouble(4, orderDetail.getPrice());
+            int ok = pstmt.executeUpdate();
             pstmt.close();
+            if (ok == 0){respOrderDetail= new OrderDetail();}
         } catch (Exception e) {
-            orderDetail.setOrderDetail(new OrderDetail());
+            respOrderDetail=new OrderDetail();
         }
-        return orderDetail;
+        return respOrderDetail;
     }
 
-    public ArrayList<OrderDetailDTO> get(OrderDetailDTO orderDetail) {
-        ArrayList<OrderDetailDTO> list = new ArrayList<>();
+    public ArrayList<OrderDetail> get(OrderDetail orderDetail, int idOrder) {
+        ArrayList<OrderDetail> list = new ArrayList<>();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("SELECT idItem, idOrder, quantity, price FROM orderdetail WHERE (NOT idOrder = 0 AND idOrder = ?) OR (NOT idItem = 0 AND idItem = ?)", Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, orderDetail.getIdOrder());
-            pstmt.setInt(2, orderDetail.getOrderDetail().getItem().getId());
+            pstmt.setInt(1, idOrder);
+            pstmt.setInt(2, orderDetail.getItem().getId());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ItemDAO itemDAO = new ItemDAO();
-                list.add(new OrderDetailDTO(rs.getInt(2), new OrderDetail(itemDAO.retriveItem(rs.getInt(2)), rs.getInt(3),rs.getDouble(4))));
+                list.add(new OrderDetail(itemDAO.retriveItem(rs.getInt(2)), rs.getInt(3),rs.getDouble(4)));
             }
             pstmt.close();
         } catch (Exception e) {

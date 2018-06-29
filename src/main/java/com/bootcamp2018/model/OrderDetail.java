@@ -5,7 +5,6 @@ public class OrderDetail {
 
 
     private Item item;
-
     private int quantity;
     private double price;
 

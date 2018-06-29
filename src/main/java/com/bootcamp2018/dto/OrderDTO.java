@@ -2,29 +2,33 @@ package com.bootcamp2018.dto;
 
 
 import com.bootcamp2018.model.Order;
+import com.bootcamp2018.model.OrderDetail;
+
+import java.util.ArrayList;
 
 public class OrderDTO {
-    private int idPayment;
-    private Order order;
 
-    public OrderDTO(int idPayment, Order order) {
-        this.idPayment = idPayment;
-        this.order = order;
+    private int Id;
+    private ArrayList<OrderDetailDTO> orderDetails;
+
+    public OrderDTO(int id, ArrayList<OrderDetailDTO> orderDetails) {
+        Id = id;
+        this.orderDetails = orderDetails;
     }
 
-    public int getIdPayment() {
-        return idPayment;
+    public int getId() {
+        return Id;
     }
 
-    public void setIdPayment(int idPayment) {
-        this.idPayment = idPayment;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public ArrayList<OrderDetailDTO> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderDetails(ArrayList<OrderDetailDTO> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

@@ -7,35 +7,35 @@ import com.bootcamp2018.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-@Controller
-@RequestMapping("/Item")
+@RestController
+@RequestMapping("/item")
 public class ItemControl {
+
     @Autowired
     private ItemService is;
 
     @RequestMapping(value="/create",method = RequestMethod.PUT)
     public ResponseEntity<Item> create(@RequestBody Item object) {
-        return new ResponseEntity<>(is.create(object),HttpStatus.OK);
+        Item item  = is.create(object);
+        return new ResponseEntity<>(item,HttpStatus.OK);
     }
 
 
     @RequestMapping(value="/get",method = RequestMethod.POST)
     public ResponseEntity<Item> get(@RequestBody Item item) {
-
-        return new ResponseEntity<>(is.get(item),HttpStatus.OK);
+        Item response = is.get(item);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @RequestMapping(value="/list",method = RequestMethod.POST)
     public ResponseEntity<ArrayList<Item>> getList(@RequestBody Item object) {
-
-        return  new ResponseEntity(is.getList(object),HttpStatus.OK);
+        return  new ResponseEntity<>(is.getList(object),HttpStatus.OK);
     }
 
     @RequestMapping(value="/update",method = RequestMethod.PUT)

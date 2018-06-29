@@ -2,16 +2,16 @@ package com.bootcamp2018.model;
 
 
 public class Payment {
-    private int Id;
+    private int id;
     private Order order;
     private double amount;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Order getOrder() {
@@ -31,18 +31,18 @@ public class Payment {
     }
 
     public Payment(int id) {
-        Id = id;
+        this.id = id;
     }
 
 
     public Payment(int id, Order order, double amount) {
-        this.Id = id;
+        this.id = id;
         this.order = order;
         this.amount = amount;
     }
 
     public Payment() {
-        this.Id = 0;
+        this.id = 0;
         this.order = new Order();
         this.amount = 0;
     }
@@ -65,7 +65,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment Id: " + getId() + ", \n" + getOrder().toString() + "\nAmount: $" + getAmount();
+        return "Payment id: " + getId() + ", \n" + getOrder().toString() + "\nAmount: $" + getAmount();
     }
 
 }
