@@ -19,7 +19,11 @@ public class ClientDTO {
         Payments = payments;
     }
 
+    public ClientDTO() {
+    }
+
     public int getId() {
+
         return id;
     }
 

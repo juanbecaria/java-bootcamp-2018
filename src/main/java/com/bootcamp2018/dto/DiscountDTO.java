@@ -1,24 +1,25 @@
 package com.bootcamp2018.dto;
 
 public class DiscountDTO {
-    private int iditem;
+    private int id;
+    private int idItem;
     private int quantity;
     private double price;
-    private int id;
 
-    public DiscountDTO(int iditem, int quantity, double price, int id) {
-        this.iditem = iditem;
+
+    public DiscountDTO(int id,int idItem, int quantity, double price) {
+        this.idItem = idItem;
         this.quantity = quantity;
         this.price = price;
         this.id = id;
     }
 
-    public int getIditem() {
-        return iditem;
+    public int getIdItem() {
+        return idItem;
     }
 
-    public void setIditem(int iditem) {
-        this.iditem = iditem;
+    public void setIdItem(int iditem) {
+        this.idItem = iditem;
     }
 
     public int getQuantity() {
