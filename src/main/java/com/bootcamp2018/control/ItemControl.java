@@ -1,9 +1,11 @@
 package com.bootcamp2018.control;
 
 import com.bootcamp2018.dao.ItemDAO;
+import com.bootcamp2018.dto.ItemDTO;
 import com.bootcamp2018.model.Item;
 
 import com.bootcamp2018.service.ItemService;
+import com.bootcamp2018.util.DTOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,26 +24,32 @@ public class ItemControl {
     private ItemService is;
 
     @RequestMapping(value="/create",method = RequestMethod.PUT)
-    public ResponseEntity<Item> create(@RequestBody Item object) {
+    public ResponseEntity<ItemDTO> create(@RequestBody Item object) {
         Item item  = is.create(object);
-        return new ResponseEntity<>(item,HttpStatus.OK);
+        return new ResponseEntity<>(DTOUtils.toItemDTO(item),HttpStatus.OK);
     }
 
 
     @RequestMapping(value="/get",method = RequestMethod.POST)
-    public ResponseEntity<Item> get(@RequestBody Item item) {
+    public ResponseEntity<ItemDTO> get(@RequestBody Item item) {
         Item response = is.get(item);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(DTOUtils.toItemDTO(response),HttpStatus.OK);
     }
     @RequestMapping(value="/list",method = RequestMethod.POST)
-    public ResponseEntity<ArrayList<Item>> getList(@RequestBody Item object) {
-        return  new ResponseEntity<>(is.getList(object),HttpStatus.OK);
+    public ResponseEntity<ArrayList<ItemDTO>> getList(@RequestBody Item object) {
+        ArrayList<ItemDTO> list = new ArrayList<>();
+        for (Item item  :is.getList(object)
+             ) {
+            list.add(DTOUtils.toItemDTO(item));
+        }
+        return  new ResponseEntity<>(list,HttpStatus.OK);
     }
 
     @RequestMapping(value="/update",method = RequestMethod.PUT)
-    public ResponseEntity<Item> update(@RequestBody Item object) {
-
-        return new ResponseEntity(is.update(object),HttpStatus.OK);
+    public ResponseEntity<ItemDTO> update(@RequestBody Item object) {
+        ItemDTO itemDTO;
+        itemDTO = DTOUtils.toItemDTO(is.update(object));
+        return new ResponseEntity(itemDTO,HttpStatus.OK);
     }
 
     @RequestMapping(value="/delete",method = RequestMethod.POST)

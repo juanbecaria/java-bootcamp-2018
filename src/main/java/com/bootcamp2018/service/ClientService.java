@@ -8,21 +8,30 @@ import java.util.ArrayList;
 
 @org.springframework.stereotype.Service
 public class ClientService implements Service<Client> {
-
     @Autowired
     private ClientDAO clientDAO;
+
+    @Override
+    public Client get(int id) {
+        return  clientDAO.get(id);
+    }
+
+    @Override
+    public ArrayList<Client> getList(int id) {
+        return clientDAO.list();
+    }
 
     @Override
     public Client create(Client object) {
        return  clientDAO.create(object);
     }
 
-    @Override
+
     public Client get(Client object) {
         return  clientDAO.get(object);
     }
 
-    @Override
+
     public ArrayList<Client> getList(Client object) {
         return clientDAO.list();
     }

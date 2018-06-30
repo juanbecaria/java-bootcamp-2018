@@ -1,32 +1,34 @@
 package com.bootcamp2018.service;
 
-import com.bootcamp2018.dto.OrderDTO;
-
+import com.bootcamp2018.model.Order;
 import java.util.ArrayList;
 
-public class OrderService implements Service<OrderDTO> {
+public class OrderService implements Service<Order> {
+
+
     @Override
-    public OrderDTO create(OrderDTO Object) {
+    public Order create(Order object) {
         return null;
     }
 
     @Override
-    public OrderDTO get(OrderDTO Object) {
+    public Order get(int id) {
         return null;
     }
 
     @Override
-    public ArrayList<OrderDTO> getList(OrderDTO Object) {
+    public ArrayList<Order> getList(int id) {
         return null;
     }
 
     @Override
-    public OrderDTO update(OrderDTO Object) {
+    public Order update(Order object) {
         return null;
     }
 
     @Override
-    public void delete(OrderDTO Object) {
+    public void delete(Order object) {
 
     }
 }
+

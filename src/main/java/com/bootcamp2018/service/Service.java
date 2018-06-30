@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public interface Service<T> {
     T create(T object);
 
-    T get(T object);
+    T get(int id);
 
-    ArrayList<T> getList(T object);
+    ArrayList<T> getList(int id);
 
     T update(T object);
 

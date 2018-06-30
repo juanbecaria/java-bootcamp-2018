@@ -57,6 +57,20 @@ public class ClientDAO {
         }
         return client;
     }
+    public Client get(int id){
+        Client client = new Client();
+        try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
+            PreparedStatement pstmt;
+            pstmt = con.prepareStatement("SELECT idClient, name, lastName, description FROM client WHERE idClient=?");
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                client = ClientCreator.mapClient(rs);
+            }
+        } catch (Exception e) {
+        }
+        return client;
+    }
 
 
     public Client delete(Client client) {

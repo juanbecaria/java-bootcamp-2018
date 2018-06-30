@@ -32,11 +32,13 @@ public class DiscountDAO {
         return discount;
     }
 
-    public Discount get(Discount discount){
+
+    public Discount get(int id){
+        Discount discount = new Discount();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("SELECT idDiscount,idItem, quantity, price FROM discount WHERE idDiscount = ?", Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, discount.getId());
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 discount.setPrice(rs.getInt(4));
@@ -67,19 +69,20 @@ public class DiscountDAO {
     }
 
     public Discount update(Discount discount){
+        Discount respDiscount = new Discount();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("UPDATE discount SET  quantity = ?, price= ? WHERE idDiscount = ?", Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, discount.getQuantity());
             pstmt.setDouble(2, discount.getPrice());
             int resp = pstmt.executeUpdate();
-            if (resp == 0) discount = new Discount();
+            if (resp == 0) respDiscount = new Discount();
             else{
-                discount = get(discount);
+                respDiscount = get(discount.getId());
             }
             pstmt.close();
         } catch (Exception e) {}
-        return discount;
+        return respDiscount;
     }
 
     public void delete(Discount discount) {

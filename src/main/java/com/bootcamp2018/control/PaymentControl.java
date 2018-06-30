@@ -1,12 +1,12 @@
 package com.bootcamp2018.control;
 
 import com.bootcamp2018.dto.PaymentDTO;
-
-
-
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
+@RestController
+@RequestMapping("/payment")
 public class PaymentControl  {
 
 

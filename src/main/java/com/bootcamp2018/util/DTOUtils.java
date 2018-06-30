@@ -23,13 +23,13 @@ public final class DTOUtils {
         return respClientDTO;
     }
 
-    public static OrderDetailDTO toOrderDetailDTO(OrderDetail orderDetail){
+    public static OrderDetailDTO toDiscountDTO(OrderDetail orderDetail){
         OrderDetailDTO respOrderDetailDTO;
         respOrderDetailDTO = new OrderDetailDTO(orderDetail.getItem().getId(),orderDetail.getQuantity(),orderDetail.getPrice());
         return respOrderDetailDTO;
     }
 
-    public static DiscountDTO toOrderDetailDTO(Discount discount){
+    public static DiscountDTO toDiscountDTO(Discount discount){
         DiscountDTO respDiscountDTO;
         respDiscountDTO = new DiscountDTO(discount.getId(),discount.getItem().getId(),discount.getQuantity(),discount.getPrice());
         return respDiscountDTO;
@@ -47,7 +47,7 @@ public final class DTOUtils {
         ArrayList<OrderDetailDTO> list = new ArrayList<>();
         for (OrderDetail orderDetail: order.getOrderDetails()
              ) {
-            list.add(toOrderDetailDTO(orderDetail));
+            list.add(toDiscountDTO(orderDetail));
         }
         respOrderDTO = new OrderDTO(order.getId(),list);
         return respOrderDTO;

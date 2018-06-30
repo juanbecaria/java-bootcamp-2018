@@ -33,19 +33,19 @@ public class PaymentDAO {
     }
 
 
-    public Payment get(Payment payment){
+    public Payment get(int idPayment){
         Payment respPayment = new Payment();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("SELECT idPayment, amount FROM payment WHERE idPaymet = ?", Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, payment.getId());
+            pstmt.setInt(1, idPayment);
             pstmt.executeQuery();
             ResultSet rs = pstmt.getResultSet();
             if (rs.next()) {
                 respPayment.setId(rs.getInt(1));
                 respPayment.setAmount(rs.getDouble(2));
                 OrderDAO orderDAO = new OrderDAO();
-                respPayment.setOrder(orderDAO.get(payment.getOrder(),respPayment.getId()));
+                respPayment.setOrder(orderDAO.get(respPayment.getId()));
             } else {
                 respPayment = new Payment();
             }

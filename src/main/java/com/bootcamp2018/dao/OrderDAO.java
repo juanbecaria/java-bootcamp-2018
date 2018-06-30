@@ -17,7 +17,7 @@ public class OrderDAO {
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 respOrder.setId(rs.getInt(1));
-                OrderDetail respOrderDetail = new OrderDetail();
+                OrderDetail respOrderDetail;
                 for (OrderDetail od : order.getOrderDetails()
                         ) {
                     OrderDetailDAO odd = new OrderDetailDAO();
@@ -44,11 +44,10 @@ public class OrderDAO {
             ResultSet rs = pstmt.getResultSet();
             if (rs.next()) {
                 respOrder.setId(rs.getInt(1));
-                ArrayList<OrderDetail> list = new ArrayList<>();
+                ArrayList<OrderDetail> list;
                 OrderDetailDAO odd = new OrderDetailDAO();
                 list =  odd.get(respOrder.getId());
                 respOrder.setOrderDetails(list);
-
             } else {
                 respOrder = new Order();
             }
@@ -58,8 +57,5 @@ public class OrderDAO {
         }
         return respOrder;
     }
-
-
-
 
 }

@@ -17,11 +17,21 @@ public class DiscountService implements Service<Discount> {
     }
 
     @Override
-    public Discount get(Discount object) {
-        return dDAO.get(object);
+    public Discount get(int id) {
+        return dDAO.get(id);
     }
 
     @Override
+    public ArrayList<Discount> getList(int id) {
+        return null;
+    }
+
+
+    public Discount get(Discount object) {
+        return dDAO.get(object.getId());
+    }
+
+
     public ArrayList<Discount> getList(Discount object) {
         return dDAO.retriveItems(object);
     }
