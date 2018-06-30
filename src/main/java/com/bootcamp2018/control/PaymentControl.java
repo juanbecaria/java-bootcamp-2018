@@ -28,7 +28,7 @@ public class PaymentControl  {
     public ResponseEntity<PaymentDTO> create(@RequestBody Payment object, @RequestBody Client client) {
         PaymentDTO paymentDTO;
         paymentDTO=  DTOUtils.toPaymentDTO(ps.create(object,client.getId()));
-        return new ResponseEntity<>(paymentDTO,HttpStatus.OK);;
+        return new ResponseEntity<>(paymentDTO,HttpStatus.OK);
 
 
     }
@@ -37,7 +37,7 @@ public class PaymentControl  {
     public ResponseEntity<PaymentDTO> get(@RequestBody Payment Object) {
         PaymentDTO paymentDTO;
         paymentDTO=  DTOUtils.toPaymentDTO(ps.get(Object.getId()));
-        return new ResponseEntity<>(paymentDTO,HttpStatus.OK);;
+        return new ResponseEntity<>(paymentDTO,HttpStatus.OK);
 
     }
 
