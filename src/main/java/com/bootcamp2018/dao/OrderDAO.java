@@ -7,10 +7,8 @@ import com.bootcamp2018.dto.OrderDetailDTO;
 import com.bootcamp2018.model.Order;
 import com.bootcamp2018.model.OrderDetail;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class OrderDAO {
     public Order create(Order order, int idPayment) {
@@ -40,23 +38,21 @@ public class OrderDAO {
         return respOrder;
     }
 
-    public Order get(Order order, int idPayment) {
+    public Order get(int idPayment) {
         Order respOrder = new Order();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
-            pstmt = con.prepareStatement("SELECT idOrder FROM 'order' WHERE idPayment = ?", Statement.RETURN_GENERATED_KEYS);
+            pstmt = con.prepareStatement("SELECT idOrder FROM 'order' WHERE idPayment = ?");
             pstmt.setInt(1, idPayment);
-            pstmt.executeUpdate();
-            ResultSet rs = pstmt.getGeneratedKeys();
+            pstmt.executeQuery();
+            ResultSet rs = pstmt.getResultSet();
             if (rs.next()) {
                 respOrder.setId(rs.getInt(1));
-                OrderDetail respOrderDetail = new OrderDetail();
-                for (OrderDetail od : order.getOrderDetails()
-                        ) {
-                    OrderDetailDAO odd = new OrderDetailDAO();
-                    respOrderDetail = odd.create(od,respOrder.getId());
-                    respOrder.getOrderDetails().add(respOrderDetail);
-                }
+                ArrayList<OrderDetail> list = new ArrayList<>();
+                OrderDetailDAO odd = new OrderDetailDAO();
+                list =  odd.get(respOrder.getId());
+                respOrder.setOrderDetails(list);
+
             } else {
                 respOrder = new Order();
             }
@@ -67,6 +63,9 @@ public class OrderDAO {
         return respOrder;
     }
 
+    private static Order build(ResultSet rs) throws SQLException {
+
+    }
 
 
 }

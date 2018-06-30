@@ -40,7 +40,17 @@ public final class DTOUtils {
         PaymentDTO respPaymentDTO;
         respPaymentDTO = new PaymentDTO(payment.getId(),payment.getOrder().getId(),payment.getAmount());
         return  respPaymentDTO;
+    }
 
+    public static  OrderDTO toOrderDTO(Order order){
+        OrderDTO respOrderDTO;
+        ArrayList<OrderDetailDTO> list = new ArrayList<>();
+        for (OrderDetail orderDetail: order.getOrderDetails()
+             ) {
+            list.add(toOrderDetailDTO(orderDetail));
+        }
+        respOrderDTO = new OrderDTO(order.getId(),list);
+        return respOrderDTO;
     }
 
 

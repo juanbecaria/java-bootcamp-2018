@@ -1,6 +1,7 @@
 package com.bootcamp2018.util;
 
 import com.bootcamp2018.dao.ItemDAO;
+import com.bootcamp2018.dao.OrderDAO;
 import com.bootcamp2018.dao.PaymentDAO;
 import com.bootcamp2018.dto.*;
 import com.bootcamp2018.model.*;
@@ -42,6 +43,27 @@ public class ModelUtils {
         item = itemDAO.retriveItem(discountDTO.getIdItem());
         respDiscount = new Discount(discountDTO.getId(),item,discountDTO.getQuantity(),discountDTO.getPrice());
         return respDiscount;
+    }
+
+    public static Payment toPayment(PaymentDTO paymentDTO){
+        Payment respPayment;
+        OrderDAO orderDAO = new OrderDAO();
+        Order order;
+        order = orderDAO.get(paymentDTO.getId());
+        respPayment = new Payment(paymentDTO.getId(),order,paymentDTO.getAmount());
+        return  respPayment;
+    }
+
+    public static Order toOrder(OrderDTO orderDTO){
+        Order respOrder= new Order();
+        respOrder.setId(orderDTO.getId());
+        for (OrderDetailDTO orderDetailDTO: orderDTO.getOrderDetails()
+             ) {
+            OrderDetail orderDetail;
+            orderDetail = toOrderDetail(orderDetailDTO);
+            respOrder.getOrderDetails().add(orderDetail);
+        }
+        return respOrder;
     }
 
 

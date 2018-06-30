@@ -33,13 +33,13 @@ public class OrderDetailDAO {
         return respOrderDetail;
     }
 
-    public ArrayList<OrderDetail> get(OrderDetail orderDetail, int idOrder) {
+    public ArrayList<OrderDetail> get(int idOrder) {
         ArrayList<OrderDetail> list = new ArrayList<>();
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
-            pstmt = con.prepareStatement("SELECT idItem, idOrder, quantity, price FROM orderdetail WHERE (NOT idOrder = 0 AND idOrder = ?) OR (NOT idItem = 0 AND idItem = ?)", Statement.RETURN_GENERATED_KEYS);
+            pstmt = con.prepareStatement("SELECT idItem, idOrder, quantity, price FROM orderdetail WHERE idOrder = ?", Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idOrder);
-            pstmt.setInt(2, orderDetail.getItem().getId());
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ItemDAO itemDAO = new ItemDAO();
