@@ -42,8 +42,8 @@ public class ClientService implements Service<Client> {
     }
 
     @Override
-    public void delete(Client object) {
-        clientDAO.delete(object);
+    public void delete(int id) {
+        clientDAO.delete(id);
     }
     //DTO class  ver patron
 }

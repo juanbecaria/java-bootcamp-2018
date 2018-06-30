@@ -5,7 +5,7 @@ import com.bootcamp2018.model.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 
-
+@org.springframework.stereotype.Service
 public abstract class PaymentService implements Service<Payment> {
     @Autowired
     private PaymentDAO paymentDAO;

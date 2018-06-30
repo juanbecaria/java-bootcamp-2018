@@ -35,7 +35,7 @@ public class OrderDetailService implements Service<OrderDetail> {
     }
 
     @Override
-    public void delete(OrderDetail object) {
+    public void delete(int id) {
 
     }
 }

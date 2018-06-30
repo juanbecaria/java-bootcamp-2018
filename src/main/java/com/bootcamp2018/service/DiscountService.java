@@ -42,7 +42,7 @@ public class DiscountService implements Service<Discount> {
     }
 
     @Override
-    public void delete(Discount object) {
-        dDAO.delete(object);
+    public void delete(int id) {
+        dDAO.delete(id);
     }
 }

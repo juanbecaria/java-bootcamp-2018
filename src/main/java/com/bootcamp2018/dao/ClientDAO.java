@@ -73,19 +73,15 @@ public class ClientDAO {
     }
 
 
-    public Client delete(Client client) {
+    public void delete(int id) {
 
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("DELETE FROM client WHERE idClient = ?");
-            pstmt.setInt(1, client.getId());
+            pstmt.setInt(1, id);
             int resp = pstmt.executeUpdate();
-            if (resp == 0) client = new Client();
+        } catch (Exception e) {  }
 
-        } catch (Exception e) {
-            client = new Client();
-        }
-        return client;
     }
 
     public Client update(Client client)  {

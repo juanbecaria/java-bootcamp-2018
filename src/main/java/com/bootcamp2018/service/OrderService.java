@@ -27,8 +27,9 @@ public class OrderService implements Service<Order> {
     }
 
     @Override
-    public void delete(Order object) {
+    public void delete(int id) {
 
     }
+
 }
 

@@ -85,11 +85,11 @@ public class DiscountDAO {
         return respDiscount;
     }
 
-    public void delete(Discount discount) {
+    public void delete(int id) {
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
-            pstmt = con.prepareStatement("DELETE FROM Discount WHERE idItem = ?");
-            pstmt.setInt(1, discount.getId());
+            pstmt = con.prepareStatement("DELETE FROM Discount WHERE idDiscount = ?");
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             pstmt.close();
         } catch (Exception e) {}
