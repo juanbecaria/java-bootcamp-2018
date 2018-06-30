@@ -1,12 +1,8 @@
 package com.bootcamp2018.dao;
 
 import com.bootcamp2018.db.DBConnection;
-import com.bootcamp2018.dto.OrderDTO;
-
-import com.bootcamp2018.dto.OrderDetailDTO;
 import com.bootcamp2018.model.Order;
 import com.bootcamp2018.model.OrderDetail;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -63,9 +59,7 @@ public class OrderDAO {
         return respOrder;
     }
 
-    private static Order build(ResultSet rs) throws SQLException {
 
-    }
 
 
 }
