@@ -11,5 +11,5 @@ public interface Service<T> {
 
     T update(T object);
 
-    void delete(T object);
+    void delete(int id);
 }

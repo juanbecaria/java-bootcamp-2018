@@ -3,10 +3,11 @@ package com.bootcamp2018.dao;
 import com.bootcamp2018.db.DBConnection;
 
 import com.bootcamp2018.model.Payment;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
-
+@Repository
 public class PaymentDAO {
 
     public Payment create(Payment payment,int idClient) {
@@ -55,5 +56,16 @@ public class PaymentDAO {
         }
         return respPayment;
 
+    }
+
+    public void delete(int id) {
+
+        try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
+            PreparedStatement pstmt;
+            pstmt = con.prepareStatement("DELETE FROM payment WHERE idPayment = ?");
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            pstmt.close();
+        } catch (Exception e) {}
     }
 }

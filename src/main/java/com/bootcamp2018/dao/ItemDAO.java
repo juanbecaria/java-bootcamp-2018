@@ -61,12 +61,12 @@ public class ItemDAO {
     }
 
 
-    public void deleteItem(Item item) {
+    public void deleteItem(int id) {
 
         try (Connection con = DBConnection.getInstance().getDataSource().getConnection()) {
             PreparedStatement pstmt;
             pstmt = con.prepareStatement("DELETE FROM item WHERE idItem = ?");
-            pstmt.setInt(1, item.getId());
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             pstmt.close();
         } catch (Exception e) {}

@@ -50,9 +50,9 @@ public class ItemService implements Service<Item> {
     }
 
     @Override
-    public void delete(Item object) {
+    public void delete(int id) {
 
-        itemDAO.deleteItem(object);
+        itemDAO.deleteItem(id);
 
     }
 }
