@@ -54,6 +54,6 @@ public class ItemControl {
 
     @RequestMapping(value="/delete",method = RequestMethod.POST)
     public void delete(@RequestBody Item object) {
-        is.delete(object);
+        is.delete(object.getId());
     }
 }
